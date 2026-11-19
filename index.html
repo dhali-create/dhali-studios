@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dhalí Studios | Lo inesperado se recuerda</title>
+<meta name="description" content="Dhalí Studios: agencia creativa. Transformamos ideas convencionales en conceptos inesperados.">
+<link rel="icon" href="img/logo-morado-sm.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Instrument+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --morado:#3a0ca3; --lila:#c8a2ff; --naranja:#ff6a00; --crema:#fff4e8; --tinta:#0f0a1a;
+  --display:"Bricolage Grotesque","Arial Narrow",Impact,sans-serif;
+  --texto:"Instrument Sans",system-ui,sans-serif;
+  --r:22px;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--tinta);color:var(--crema);font:400 1rem/1.55 var(--texto)}
+h1,h2,h3{font-family:var(--display);font-weight:800;font-stretch:75%;text-transform:uppercase;letter-spacing:-.015em;line-height:.98}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--lila);outline-offset:3px}
+.page{width:min(1280px,100%);margin:0 auto;padding:0 1rem 1rem;display:grid;gap:1rem}
+.card{position:relative;border-radius:var(--r);overflow:hidden}
+.pad{padding:clamp(1.5rem,4vw,3.5rem)}
+
+/* Recurso firma: texto sobre barras negras, línea por línea */
+.bar{background:var(--tinta);color:var(--crema);padding:.04em .28em;line-height:1.32;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+/* Trama de manchas en X */
+.lattice{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44'%3E%3Cpath d='M9 9l26 26M35 9L9 35' stroke='%233a0ca3' stroke-width='11' stroke-linecap='round'/%3E%3C/svg%3E")}
+.lattice.or{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44'%3E%3Cpath d='M9 9l26 26M35 9L9 35' stroke='%23ff6a00' stroke-width='11' stroke-linecap='round'/%3E%3C/svg%3E")}
+
+/* FONDO ANIMADO (cubre toda la página; el video es opcional) */
+.fondo{position:fixed;inset:0;z-index:-1;overflow:hidden;background:var(--tinta)}
+.o{position:absolute;border-radius:50%;filter:blur(70px);will-change:transform;animation:deriva 22s ease-in-out infinite alternate}
+.o1{width:60vmax;height:60vmax;background:var(--morado);left:-15vmax;top:-20vmax}
+.o2{width:42vmax;height:42vmax;background:var(--naranja);right:-14vmax;top:8vmax;opacity:.7;animation-duration:26s;animation-delay:-8s}
+.o3{width:34vmax;height:34vmax;background:var(--lila);left:30vmax;bottom:-18vmax;opacity:.5;animation-duration:30s;animation-delay:-15s}
+.o4{width:26vmax;height:26vmax;background:#6c2bd9;left:5vmax;bottom:10vmax;opacity:.7;animation-duration:18s}
+@keyframes deriva{from{transform:translate(0,0) scale(1)}to{transform:translate(10vmax,6vmax) scale(1.2)}}
+.bgvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5}
+.velo{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,10,26,.25),rgba(15,10,26,.7))}
+
+/* HEADER flotante en crema: contrasta con el fondo oscuro */
+.top{position:sticky;top:.8rem;z-index:30;margin-top:.8rem;background:var(--crema);color:var(--tinta);border-radius:60px;padding:.45rem .5rem .45rem 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.logo{display:block;line-height:0}
+.logo img{height:46px;width:auto}
+.top ul{display:flex;gap:.3rem;list-style:none;padding:0}
+.top a.p{display:block;padding:.55rem 1.05rem;border-radius:40px;text-decoration:none;font-weight:700;font-size:.92rem;color:var(--tinta);transition:background .2s,color .2s}
+.top a.p:hover{background:var(--lila)}
+.top a.p.on{background:var(--morado);color:var(--crema)}
+.top a.p.cta{background:var(--naranja)}
+.top a.p.cta:hover{background:var(--tinta);color:var(--crema)}
+.burger{display:none;width:46px;height:46px;border:0;border-radius:50%;background:var(--morado);cursor:pointer;position:relative}
+.burger::before,.burger::after,.burger span{content:"";position:absolute;left:13px;right:13px;height:3px;border-radius:3px;background:var(--crema);transition:transform .25s,opacity .25s}
+.burger::before{top:16px}.burger span{top:22px}.burger::after{top:28px}
+.top.abierto .burger::before{transform:translateY(6px) rotate(45deg)}
+.top.abierto .burger::after{transform:translateY(-6px) rotate(-45deg)}
+.top.abierto .burger span{opacity:0}
+
+/* HERO transparente sobre el fondo animado */
+.hero{min-height:calc(100svh - 7rem);display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:2rem;padding:2.5rem .5rem}
+.hero h1{font-size:clamp(2.8rem,7vw,6rem)}
+.hero p{margin:1.6rem 0;font-size:1.2rem;font-weight:500;max-width:36ch;background:rgba(15,10,26,.7);padding:.9rem 1.1rem;border-radius:14px;backdrop-filter:blur(6px)}
+.acts{display:flex;flex-wrap:wrap;gap:.7rem}
+.btn{display:inline-block;border:0;cursor:pointer;font:700 1rem var(--texto);padding:.95rem 1.7rem;border-radius:40px;background:var(--tinta);color:var(--crema);text-decoration:none;transition:transform .2s,background .2s,color .2s}
+.btn:hover{transform:translateY(-3px)}
+.btn.m{background:var(--naranja);color:var(--tinta)}
+.btn.ghost{background:transparent;color:var(--crema);box-shadow:inset 0 0 0 2px var(--crema)}
+.btn.ghost:hover{background:var(--crema);color:var(--tinta)}
+.logo-hero{width:100%;max-width:560px;justify-self:center;filter:drop-shadow(0 30px 40px rgba(0,0,0,.45));animation:flot 7s ease-in-out infinite alternate}
+@keyframes flot{from{transform:translateY(-10px) rotate(-3deg)}to{transform:translateY(12px) rotate(3deg)}}
+.ticker{background:var(--naranja);color:var(--tinta);border-radius:var(--r);overflow:hidden;white-space:nowrap}
+.tk{display:inline-block;padding:.8rem 0;animation:marq 30s linear infinite}
+.tk span{font-family:var(--display);font-stretch:75%;font-weight:800;font-size:1.6rem;text-transform:uppercase;margin:0 1.2rem}
+.tk span::after{content:"✺";margin-left:2.4rem;color:var(--morado)}
+@keyframes marq{to{transform:translateX(-50%)}}
+footer .logo img{height:60px}
+
+/* DECLARACIÓN (nombre) */
+#nombre{background:var(--morado);display:grid;grid-template-columns:1fr 30% 9%;min-height:480px}
+#nombre .izq{padding:clamp(1.5rem,4vw,3.5rem);display:flex;flex-direction:column;justify-content:space-between;gap:2rem;position:relative}
+#nombre h2{font-size:clamp(2.6rem,6.4vw,5.6rem);position:relative;z-index:1}
+.splash{position:absolute;width:min(46%,260px);left:34%;top:6%;z-index:0;fill:var(--naranja)}
+#nombre .izq p{position:relative;z-index:1;font-weight:500;font-size:1.05rem;text-transform:uppercase;letter-spacing:.02em;color:var(--lila)}
+#nombre .izq p b{color:var(--crema)}
+.col{background:var(--tinta);padding:1.8rem 1.4rem;display:flex;flex-direction:column;justify-content:space-between;gap:1.5rem;font-size:.88rem}
+.col p+p{margin-top:.9rem}
+
+/* DALÍ / DHALÍ */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.q{background:var(--crema);color:var(--tinta);display:grid;grid-template-columns:1fr 46%;grid-template-rows:auto auto;min-height:340px}
+.q .qt{grid-column:1/-1;padding:1.8rem 1.8rem 1.2rem;display:flex;align-items:flex-end;gap:.7rem}
+.qm{font-family:var(--display);font-weight:800;font-size:5rem;line-height:.7;color:var(--naranja)}
+.q h3{font-size:clamp(2rem,4vw,3.2rem)}
+.q .qb{grid-column:1/-1;background:var(--morado);color:var(--crema);padding:.9rem 1.8rem;font-family:var(--display);font-stretch:75%;font-weight:600;font-size:clamp(1.3rem,2.6vw,1.9rem)}
+.q.dh .qb{background:var(--naranja);color:var(--tinta)}
+.q .qx{grid-column:2;background:var(--tinta);color:var(--crema);padding:1.2rem 1.4rem;font-size:.85rem;margin:0 1.2rem 1.2rem 0;align-self:end;border-radius:0 0 8px 8px}
+.q .qs{grid-column:1;align-self:end;padding:0 1.8rem 1.4rem;font-family:var(--display);font-stretch:75%;font-weight:800;font-size:1.4rem;text-transform:uppercase;color:var(--morado)}
+
+/* PROCESO */
+#proceso,#serv{background:var(--naranja);color:var(--tinta)}
+#proceso h2,#serv h2{font-size:clamp(2.2rem,5vw,4.4rem);max-width:15ch;margin-bottom:2.2rem;position:relative;z-index:1}
+.corner{position:absolute;top:0;right:0;width:150px;height:130px;opacity:.95;border-bottom-left-radius:var(--r)}
+.pasos{display:grid;grid-template-columns:repeat(5,1fr);gap:.7rem;list-style:none;padding:0;counter-reset:p;position:relative;z-index:1}
+.pasos li{counter-increment:p;aspect-ratio:3/5;border-radius:10px;padding:1rem;display:flex;flex-direction:column;justify-content:space-between;transition:transform .25s;overflow:hidden}
+.pasos li:hover{transform:translateY(-8px)}
+.pasos li::before{content:counter(p);font-family:var(--display);font-weight:800;font-size:clamp(3.5rem,7vw,6rem);line-height:.8}
+.pasos li:nth-child(1){background:var(--morado);color:var(--crema)}
+.pasos li:nth-child(2){background:var(--crema)}
+.pasos li:nth-child(3){background:var(--tinta);color:var(--crema)}
+.pasos li:nth-child(4){background:var(--lila)}
+.pasos li:nth-child(5){background:var(--morado);color:var(--crema)}
+.pasos span{font-size:.82rem;line-height:1.35}
+.tag{display:inline-block;margin-top:.5rem;background:var(--morado);color:var(--crema);font:700 .95rem var(--texto);padding:.15rem .6rem;border-radius:3px}
+.pasos li:nth-child(1) .tag,.pasos li:nth-child(5) .tag{background:var(--naranja);color:var(--tinta)}
+
+/* PROYECTO iSUSHI */
+#proyecto{background:var(--crema);color:var(--tinta)}
+#proyecto h2{font-size:clamp(2.6rem,7.5vw,6.4rem);color:var(--morado)}
+.lead{margin:1.2rem 0 2rem;max-width:56ch;font-weight:500;font-size:1.1rem}
+.caso{display:grid;grid-template-columns:1.7fr 1fr;gap:1rem}
+.media{aspect-ratio:var(--ar,16/9);background:var(--morado);color:var(--lila);border-radius:16px;overflow:hidden;display:grid;place-items:center;text-align:center;padding:1rem;font-size:.9rem}
+.media.dk{background:var(--tinta)}
+.media iframe,.media img{width:100%;height:100%;border:0;object-fit:cover}
+.ficha{background:var(--tinta);color:var(--crema);border-radius:16px;padding:1.6rem;font-size:.92rem;display:grid;gap:1rem;align-content:start}
+.ficha h3{font-size:1.9rem;color:var(--naranja)}
+.ficha dt{font-weight:700;color:var(--lila)}
+.ficha dd{margin:0}
+#reels{background:var(--naranja);color:var(--tinta)}
+.rwrap{display:grid;grid-template-columns:.7fr 1.8fr;gap:2rem;align-items:center;position:relative;z-index:1}
+#reels h2{font-size:clamp(3rem,9vw,7.5rem);margin-bottom:1rem}
+#reels p{font-weight:500;max-width:28ch}
+.rl{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.rl .media{border-radius:12px}
+.rl .media:nth-child(2){background:var(--tinta)}
+.rl .media:nth-child(3){background:var(--lila);color:var(--morado)}
+.mix{display:grid;grid-template-columns:1.5fr 1fr;gap:1rem}
+.mix h2{font-size:clamp(2.2rem,4.6vw,3.8rem);margin-bottom:1.4rem}
+#valla{background:var(--morado);color:var(--crema)}
+#cunas{background:var(--lila);color:var(--tinta)}
+.cap{margin-top:1rem;font-size:.9rem}
+.cuna{background:var(--crema);border-radius:12px;padding:.9rem 1rem;display:grid;gap:.5rem;margin-bottom:.7rem}
+.cuna b{font-family:var(--display);font-stretch:75%;text-transform:uppercase;font-size:1.25rem;color:var(--morado)}
+.cuna audio{width:100%}
+
+/* TEAM */
+#team{background:var(--naranja);color:var(--tinta)}
+#team h2{font-size:clamp(3rem,10vw,8.5rem);margin-bottom:1.8rem}
+.equipo{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.7rem}
+.persona{aspect-ratio:3/4;border-radius:10px;position:relative;overflow:hidden;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:7rem;transition:transform .25s}
+.persona:hover{transform:translateY(-8px)}
+.persona:nth-child(1){background:var(--morado);color:var(--lila)}
+.persona:nth-child(2){background:var(--crema);color:var(--naranja)}
+.persona:nth-child(3){background:var(--tinta);color:var(--lila)}
+.persona:nth-child(4){background:var(--lila);color:var(--morado)}
+.persona img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.persona figcaption{position:absolute;left:.7rem;bottom:.7rem;font-family:var(--texto);font-size:.85rem;font-weight:500;line-height:1.25;color:var(--crema)}
+.persona figcaption b{display:block;background:var(--morado);width:max-content;padding:.1rem .5rem;border-radius:3px;font-size:.95rem}
+.persona figcaption span{display:block;background:var(--tinta);width:max-content;padding:0 .5rem;border-radius:0 0 3px 3px;font-size:.78rem}
+
+/* CONTACTO */
+#contacto{background:var(--morado);display:grid;grid-template-columns:1fr 38% 5%}
+#contacto .izq{padding:clamp(1.5rem,4vw,3.5rem);position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:2rem}
+#contacto h2{font-size:clamp(2.4rem,5.6vw,5rem);position:relative;z-index:1}
+#contacto .splash{left:auto;right:6%;top:30%;width:min(36%,220px)}
+.redes{display:flex;flex-wrap:wrap;gap:.5rem;position:relative;z-index:1}
+.redes a{padding:.45rem 1rem;border:2px solid var(--crema);border-radius:40px;font-weight:700;font-size:.9rem;text-decoration:none}
+.redes a:hover{background:var(--crema);color:var(--morado)}
+form{display:grid;gap:.9rem;align-content:center}
+label{display:grid;gap:.3rem;font-weight:700;font-size:.85rem}
+input,textarea{font:400 1rem var(--texto);padding:.75rem .9rem;border:2px solid var(--crema);border-radius:8px;background:transparent;color:var(--crema)}
+input:focus,textarea:focus{border-color:var(--naranja);outline:0}
+textarea{min-height:110px;resize:vertical}
+
+footer{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;padding:1.2rem .5rem .6rem;font-size:.88rem;color:var(--lila)}
+
+/* PÁGINAS (como en la plantilla de Wix) */
+.pagina{display:grid;gap:1rem}
+.pagina[hidden]{display:none}
+.top a.p.on{background:var(--naranja);border-color:var(--naranja);color:var(--tinta)}
+.ph{background:var(--naranja);color:var(--tinta);min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;gap:1.2rem}
+.ph h1{font-size:clamp(2.8rem,8vw,6.4rem)}
+.ph p,.intro{font-weight:500;font-size:1.15rem;max-width:50ch}
+.intro{margin-bottom:2rem;position:relative;z-index:1}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.bx{border-radius:var(--r);padding:clamp(1.4rem,3vw,2.2rem);min-height:280px;display:flex;flex-direction:column;gap:1rem}
+.bx h3{font-size:clamp(1.8rem,3vw,2.6rem)}
+.bx ul{padding-left:1.1rem;display:grid;gap:.4rem}
+.bx blockquote{font-family:var(--display);font-stretch:75%;font-weight:800;text-transform:uppercase;font-size:clamp(1.6rem,2.8vw,2.3rem);line-height:1.02}
+.c-cr{background:var(--crema);color:var(--tinta)}
+.c-mo{background:var(--morado);color:var(--crema)}
+.c-li{background:var(--lila);color:var(--tinta)}
+.c-na{background:var(--naranja);color:var(--tinta)}
+.c-tn{background:var(--tinta);color:var(--crema)}
+.bx .tag{align-self:flex-start;margin:0}
+.pj{text-decoration:none;justify-content:space-between;transition:transform .25s}
+.pj:hover{transform:translateY(-6px)}
+.pj b{font-weight:700}
+#pj-home{background:var(--crema);color:var(--tinta)}
+#pj-home h2{font-size:clamp(2.4rem,6vw,5rem);color:var(--morado);margin-bottom:1rem}
+#pj-home .intro{margin-bottom:1.6rem}
+#mueve{background:var(--morado);color:var(--crema)}
+#mueve h2{font-size:clamp(2.2rem,5vw,4rem);margin-bottom:1.6rem}
+#origen{background:var(--lila);color:var(--tinta)}
+#origen h2{font-size:clamp(2.2rem,5vw,4rem);color:var(--morado);margin-bottom:1rem}
+#origen p{font-weight:500;max-width:62ch}
+#contacto{scroll-margin-top:7rem}
+.pasos.tres{grid-template-columns:repeat(3,1fr)}
+.pasos.tres li{aspect-ratio:auto;min-height:300px}
+.pasos.tres li:nth-child(2n){margin-top:0}
+.pasos.tres span{font-size:.98rem}
+
+@media (max-width:900px){
+  #nombre,#contacto,.duo,.panel,.hero{grid-template-columns:1fr}
+  #nombre .col{min-height:260px}
+  #contacto .col{order:2}
+  .pasos{grid-template-columns:repeat(2,1fr)}
+  .pasos li{aspect-ratio:4/3}
+  .strip{display:none}
+}
+@media (max-width:560px){.q{grid-template-columns:1fr}.q .qx{grid-column:1;margin:0 1.2rem 1.2rem}.q .qs{display:none}}
+@media (max-width:900px){
+  .caso,.mix,.rwrap{grid-template-columns:1fr}
+  .rl{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:62%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.4rem}
+  .rl .media{scroll-snap-align:start}
+}
+@media (max-width:900px){.trio,.pasos.tres{grid-template-columns:1fr}.pasos.tres li{min-height:200px}}
+@media (max-width:860px){
+  .burger{display:block}
+  .top ul{display:none;position:absolute;left:0;right:0;top:calc(100% + .5rem);flex-direction:column;background:var(--crema);border-radius:26px;padding:.7rem;box-shadow:0 14px 34px rgba(0,0,0,.45)}
+  .top.abierto ul{display:flex}
+  .top a.p{padding:.8rem 1rem}
+  .hero{min-height:auto;padding-top:1.5rem}
+  .logo-hero{max-width:300px;order:-1}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <symbol id="blob" viewBox="0 0 260 220"><path d="M60 20c30-25 70-5 85 20s55 5 70 35-10 55-35 65-30 40-70 35-60-25-70-55S25 70 40 45z"/></symbol>
+  <symbol id="spl" viewBox="0 0 200 200"><path d="M100 4c12 0 14 26 26 31s36-14 46 2-10 30-5 44 32 18 24 36-34 9-38 23 10 36-6 44-28-14-42-12-22 32-40 24-6-36-18-46-38-6-42-24 20-30 18-42-28-20-20-38 34-2 44-10 8-32 8-32z"/></symbol>
+</svg>
+
+<div class="fondo" aria-hidden="true">
+  <i class="o o1"></i><i class="o o2"></i><i class="o o3"></i><i class="o o4"></i>
+  <!-- VIDEO DE FONDO (opcional): sube un mp4 corto, liviano y sin sonido a video/fondo.mp4. Si no existe, se ve solo la animación -->
+  <video class="bgvid" autoplay muted loop playsinline preload="metadata" src="video/fondo.mp4" onerror="this.remove()"></video>
+  <span class="velo"></span>
+</div>
+
+<div class="page">
+
+<header class="top" id="menu">
+  <a class="logo" href="#inicio" data-go="inicio"><img src="img/logo-morado-sm.png" alt="Dhalí Studios"></a>
+  <nav aria-label="Principal"><ul>
+    <li><a class="p" href="#inicio" data-go="inicio">Inicio</a></li>
+    <li><a class="p" href="#nosotros" data-go="nosotros">Acerca de nosotros</a></li>
+    <li><a class="p" href="#servicios" data-go="servicios">Servicios</a></li>
+    <li><a class="p" href="#proyectos" data-go="proyectos">Proyecto iSushi</a></li>
+    <li><a class="p cta" href="#contacto" data-go="inicio" data-anchor="contacto">Contacto</a></li>
+  </ul></nav>
+  <button class="burger" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+</header>
+
+<main style="display:contents">
+
+<!-- ================= PÁGINA: INICIO (Home) ================= -->
+<div class="pagina" id="pg-inicio">
+
+<!-- HERO: transparente sobre el fondo animado, con el logo real -->
+<section class="hero" id="inicio">
+  <div>
+    <h1><span class="bar">Lo inesperado se recuerda.</span></h1>
+    <p>Transformamos ideas convencionales en conceptos, campañas y contenido que dejan de ser uno más.</p>
+    <div class="acts">
+      <a class="btn m" href="#proyectos" data-go="proyectos">Ver proyecto iSushi</a>
+      <a class="btn ghost" href="#contacto" data-go="inicio" data-anchor="contacto">Hablemos</a>
+    </div>
+  </div>
+  <img class="logo-hero" src="img/logo-naranja.png" alt="Logo de Dhalí Studios">
+</section>
+<div class="ticker" aria-hidden="true"><div class="tk"><span>Idea</span><span>Concepto</span><span>Diseño</span><span>Contenido</span><span>Audiovisual</span><span>Idea</span><span>Concepto</span><span>Diseño</span><span>Contenido</span><span>Audiovisual</span><span>Idea</span><span>Concepto</span><span>Diseño</span><span>Contenido</span><span>Audiovisual</span><span>Idea</span><span>Concepto</span><span>Diseño</span><span>Contenido</span><span>Audiovisual</span></div></div>
+
+<!-- ACERCA DE NOSOTROS (resumen) -->
+<section class="card" id="nombre">
+  <div class="izq">
+    <svg class="splash" aria-hidden="true"><use href="#spl"/></svg>
+    <h2>Acerca de nosotros</h2>
+    <p>De la imaginación <b>a la comunicación</b><br>De lo convencional <b>a lo inesperado</b></p>
+  </div>
+  <div class="col">
+    <div>
+      <p><strong>Quiénes somos.</strong> Una agencia creativa que va de la idea al audiovisual.</p>
+      <p><strong>Misión.</strong> Transformar ideas convencionales en conceptos inesperados que hagan que una marca deje de ser una más.</p>
+      <p><strong>Visión.</strong> Ser la agencia que invite a las marcas a comunicar distinto, con ideas que se recuerdan.</p>
+    </div>
+    <a class="btn m" href="#nosotros" data-go="nosotros">Conócenos</a>
+  </div>
+  <div class="strip"></div>
+</section>
+
+<!-- SERVICIOS (resumen) -->
+<section class="card pad" id="serv">
+  <div class="corner lattice" aria-hidden="true"></div>
+  <h2><span class="bar">Así le damos forma a lo que imaginas</span></h2>
+  <p class="intro">Dhalí Studios es el espacio donde las ideas toman forma: del concepto a las piezas finales.</p>
+  <ol class="pasos tres">
+    <li><div><span>Encontramos el giro inesperado que diferencia a tu marca.</span><br><b class="tag">Idea y concepto</b></div></li>
+    <li><div><span>Identidad, piezas gráficas y mensajes para cada canal.</span><br><b class="tag">Diseño y contenido</b></div></li>
+    <li><div><span>Spot, reels y radio con una sola voz.</span><br><b class="tag">Audiovisual</b></div></li>
+  </ol>
+  <p style="margin-top:1.8rem;position:relative;z-index:1"><a class="btn" href="#servicios" data-go="servicios">Ver servicios</a></p>
+</section>
+
+<!-- PROYECTOS (resumen, tarjetas) -->
+<section class="card pad" id="pj-home">
+  <h2>Proyecto iSushi</h2>
+  <p class="intro">Una campaña integral: spot, reels, valla y radio, con una sola idea: ¡un rollo de sabor!</p>
+  <div class="trio">
+    <a class="card bx pj c-mo" href="#proyectos" data-go="proyectos"><h3>Spot publicitario</h3><p>El spot horizontal que cuenta la idea.</p><b>Ver proyecto →</b></a>
+    <a class="card bx pj c-na" href="#proyectos" data-go="proyectos"><h3>Reels</h3><p>Tres piezas verticales para redes.</p><b>Ver proyecto →</b></a>
+    <a class="card bx pj c-li" href="#proyectos" data-go="proyectos"><h3>Valla y cuñas</h3><p>Exterior y radio con una sola voz.</p><b>Ver proyecto →</b></a>
+  </div>
+</section>
+
+<!-- LO QUE NOS MUEVE (reemplaza el carrusel de reseñas; frases propias, sin reseñas inventadas) -->
+<section class="card pad" id="mueve">
+  <h2>Lo que nos mueve</h2>
+  <div class="trio">
+    <div class="bx c-tn"><b class="tag">Insight</b><blockquote>Si una marca comunica como todas, será recordada como todas.</blockquote></div>
+    <div class="bx c-cr"><b class="tag">Diferencial</b><blockquote>Encontramos el giro inesperado.</blockquote></div>
+    <div class="bx c-na"><b class="tag">Promesa</b><blockquote>Hacer que tu marca deje de ser una más.</blockquote></div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="card" id="contacto">
+  <div class="izq">
+    <svg class="splash" aria-hidden="true"><use href="#spl"/></svg>
+    <h2>Hagamos que tu marca deje de ser una más.</h2>
+    <div class="redes">
+      <a href="mailto:hola@dhalistudios.com">hola@dhalistudios.com</a>
+      <a href="https://instagram.com/" rel="noopener">Instagram</a>
+      <a href="https://tiktok.com/" rel="noopener">TikTok</a>
+    </div>
+  </div>
+  <div class="col">
+    <!-- Cambia TU_ID por tu código de Formspree (formspree.io, plan gratis) -->
+    <form action="https://formspree.io/f/TU_ID" method="POST">
+      <label>Nombre<input name="nombre" required autocomplete="given-name"></label>
+      <label>Apellido<input name="apellido" required autocomplete="family-name"></label>
+      <label>Correo electrónico<input type="email" name="email" required autocomplete="email"></label>
+      <label>Mensaje<textarea name="mensaje" required></textarea></label>
+      <button class="btn m" type="submit">Enviar mensaje</button>
+    </form>
+  </div>
+  <div class="strip"></div>
+</section>
+
+</div>
+
+<!-- ================= PÁGINA: ACERCA DE NOSOTROS (About Us) ================= -->
+<div class="pagina" id="pg-nosotros" hidden>
+<section class="card pad ph">
+  <h1><span class="bar">Acerca de nosotros</span></h1>
+  <p>Somos Dhalí Studios: pensamos el concepto, diseñamos las piezas y las producimos. Lo inesperado se recuerda.</p>
+</section>
+<div class="trio">
+  <article class="bx c-cr"><h3>Quiénes somos</h3><p>Una agencia creativa que va de la idea al audiovisual: concepto, diseño, contenido y producción en un mismo espacio.</p></article>
+  <article class="bx c-mo"><h3>Misión</h3><p>Transformar ideas convencionales en conceptos inesperados que hagan que una marca deje de ser una más.</p></article>
+  <article class="bx c-li"><h3>Visión</h3><p>Ser la agencia que invite a las marcas a comunicar distinto, con ideas inesperadas que se recuerdan.</p></article>
+</div>
+<section class="card pad" id="origen">
+  <h2>El origen del nombre</h2>
+  <p><strong>Dhalí</strong> es una reinterpretación del universo surrealista de Dalí: una forma de ver la realidad desde otra perspectiva y convertir lo imposible en algo imaginable. <strong>Studios</strong> es el espacio donde esas ideas toman forma y se convierten en piezas, campañas y experiencias.</p>
+</section>
+<!-- DALÍ / DHALÍ -->
+<div class="duo">
+  <article class="card q">
+    <div class="qt"><span class="qm" aria-hidden="true">“</span><h3>Dalí</h3></div>
+    <div class="qb">Cuestionaba la realidad</div>
+    <p class="qs">Del arte</p>
+    <p class="qx">Transformaba lo cotidiano e imaginaba lo imposible a través del arte.</p>
+  </article>
+  <article class="card q dh">
+    <div class="qt"><span class="qm" aria-hidden="true">“</span><h3>Dhalí</h3></div>
+    <div class="qb">Cuestiona lo convencional</div>
+    <p class="qs">A la publicidad</p>
+    <p class="qx">Transforma la comunicación y crea lo inesperado a través de la creatividad.</p>
+  </article>
+</div>
+
+<!-- TEAM -->
+<section class="card pad" id="team">
+  <div class="corner lattice" aria-hidden="true"></div>
+  <h2>Team</h2>
+  <div class="equipo">
+    <!-- Para usar una foto: agrega <img src="img/nombre.jpg" alt="Nombre"> antes del figcaption -->
+    <figure class="persona">P<figcaption><b>Paola</b><span>Rol en la agencia</span></figcaption></figure>
+    <figure class="persona">N<figcaption><b>Nombre</b><span>Rol en la agencia</span></figcaption></figure>
+    <figure class="persona">N<figcaption><b>Nombre</b><span>Rol en la agencia</span></figcaption></figure>
+    <figure class="persona">N<figcaption><b>Nombre</b><span>Rol en la agencia</span></figcaption></figure>
+  </div>
+</section>
+
+</div>
+
+<!-- ================= PÁGINA: SERVICIOS (Our Services) ================= -->
+<div class="pagina" id="pg-servicios" hidden>
+<section class="card pad ph">
+  <h1><span class="bar">Nuestros servicios</span></h1>
+  <p>De la primera idea a la pieza final, todo bajo una misma voz.</p>
+</section>
+<div class="trio">
+  <article class="bx c-mo"><h3>Idea y concepto</h3><ul><li>Insight y estrategia</li><li>Concepto creativo</li><li>Slogan y promesa de marca</li></ul></article>
+  <article class="bx c-cr"><h3>Diseño y contenido</h3><ul><li>Identidad visual</li><li>Piezas gráficas y valla</li><li>Contenido para redes</li></ul></article>
+  <article class="bx c-li"><h3>Audiovisual</h3><ul><li>Spot publicitario</li><li>Reels</li><li>Cuñas de radio</li></ul></article>
+</div>
+<!-- PROCESO -->
+<section class="card pad" id="proceso">
+  <div class="corner lattice" aria-hidden="true"></div>
+  <h2><span class="bar">Así le damos forma a lo que imaginas</span></h2>
+  <ol class="pasos">
+    <li><div><span>El punto de partida: un problema y una chispa.</span><br><b class="tag">Idea</b></div></li>
+    <li><div><span>El giro inesperado que diferencia a la marca.</span><br><b class="tag">Concepto</b></div></li>
+    <li><div><span>Identidad, piezas y dirección de arte.</span><br><b class="tag">Diseño</b></div></li>
+    <li><div><span>Mensajes e historias para cada canal.</span><br><b class="tag">Contenido</b></div></li>
+    <li><div><span>Spot, reels y radio con una sola voz.</span><br><b class="tag">Audiovisual</b></div></li>
+  </ol>
+</section>
+
+</div>
+
+<!-- ================= PÁGINA: PROYECTO iSUSHI (Our Work) ================= -->
+<div class="pagina" id="pg-proyectos" hidden>
+<!-- PROYECTO iSUSHI -->
+<section class="card pad" id="proyecto">
+  <h2>iSushi…<br><span class="bar">¡un rollo de sabor!</span></h2>
+  <p class="lead">Una campaña integral que lleva una misma idea a spot, reels, valla y radio.</p>
+  <div class="caso">
+    <!-- SPOT PRINCIPAL (horizontal 16:9). Reemplaza el <span> por:
+         <iframe src="https://www.youtube.com/embed/TU_ID" title="Spot iSushi" allowfullscreen></iframe> -->
+    <div class="media" id="spot"><span>Spot publicitario · horizontal 16:9<br>Pega aquí el iframe de YouTube</span></div>
+    <dl class="ficha">
+      <h3>Ficha del proyecto</h3>
+      <div><dt>Cliente</dt><dd>iSushi</dd></div>
+      <div><dt>Concepto</dt><dd>¡Un rollo de sabor! [Explica el juego de palabras y la idea detrás]</dd></div>
+      <div><dt>Objetivo</dt><dd>[Qué buscaba lograr la campaña]</dd></div>
+      <div><dt>Entregables</dt><dd>1 spot · 3 reels · 1 valla · 3 cuñas</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="card pad" id="reels">
+  <div class="corner lattice" aria-hidden="true"></div>
+  <div class="rwrap">
+    <div>
+      <h2>Reels</h2>
+      <p>Tres piezas verticales para redes, pensadas para enganchar en los primeros segundos.</p>
+    </div>
+    <!-- Cada reel (vertical 9:16): reemplaza el <span> por un <iframe> de YouTube Shorts o un <video controls src="video/reel1.mp4"> -->
+    <div class="rl">
+      <div class="media" style="--ar:9/16"><span>Reel 1<br>9:16</span></div>
+      <div class="media" style="--ar:9/16"><span>Reel 2<br>9:16</span></div>
+      <div class="media" style="--ar:9/16"><span>Reel 3<br>9:16</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="mix">
+  <article class="card pad" id="valla">
+    <h2>Valla publicitaria</h2>
+    <!-- Reemplaza el <span> por <img src="img/valla.jpg" alt="Valla publicitaria de iSushi"> -->
+    <div class="media dk" style="--ar:2/1"><span>Imagen de la valla<br>(foto o mockup)</span></div>
+    <p class="cap">[Ubicación o descripción de la pieza]</p>
+  </article>
+  <article class="card pad" id="cunas">
+    <h2>Cuñas de radio</h2>
+    <!-- Sube tus audios a una carpeta audio/ (mp3) -->
+    <div class="cuna"><b>Cuña 1</b><audio controls preload="none" src="audio/cuna1.mp3"></audio></div>
+    <div class="cuna"><b>Cuña 2</b><audio controls preload="none" src="audio/cuna2.mp3"></audio></div>
+    <div class="cuna"><b>Cuña 3</b><audio controls preload="none" src="audio/cuna3.mp3"></audio></div>
+  </article>
+</div>
+
+</div>
+</main>
+
+<footer>
+  <div><a class="logo" href="#inicio" data-go="inicio"><img src="img/logo-lila-sm.png" alt="Dhalí Studios"></a></div>
+  <span>Lo inesperado se recuerda.</span>
+  <span><a href="mailto:hola@dhalistudios.com">hola@dhalistudios.com</a> · <a href="https://instagram.com/" rel="noopener">Instagram</a> · <a href="https://tiktok.com/" rel="noopener">TikTok</a></span>
+  <span>© 2026 Dhalí Studios · Universidad Privada del Norte · Proyecto académico</span>
+</footer>
+</div>
+
+<script>
+/* Navegación por páginas, como en el sitio de Wix */
+const menu=document.getElementById('menu'), burger=menu.querySelector('.burger');
+burger.addEventListener('click',()=>{const o=menu.classList.toggle('abierto');burger.setAttribute('aria-expanded',o);});
+const pags=[...document.querySelectorAll('.pagina')], ids=['inicio','nosotros','servicios','proyectos'];
+function ir(id,ancla){
+  menu.classList.remove('abierto'); burger.setAttribute('aria-expanded','false');
+  pags.forEach(p=>p.hidden=p.id!=='pg-'+id);
+  document.querySelectorAll('.top a.p').forEach(a=>a.classList.toggle('on',a.dataset.go===id&&!a.dataset.anchor));
+  history.replaceState(null,'','#'+(ancla||id));
+  const t=ancla&&document.getElementById(ancla);
+  t?t.scrollIntoView():window.scrollTo(0,0);
+}
+document.addEventListener('click',e=>{
+  const a=e.target.closest('[data-go]'); if(!a) return;
+  e.preventDefault(); ir(a.dataset.go,a.dataset.anchor);
+});
+const h=location.hash.slice(1); ir(ids.includes(h)?h:'inicio');
+</script>
+</body>
+</html>
