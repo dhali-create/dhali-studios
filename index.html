@@ -121,6 +121,9 @@ footer .logo img{height:60px}
 /* PROYECTO iSUSHI */
 #proyecto{background:var(--crema);color:var(--tinta)}
 #proyecto h2{font-size:clamp(2.6rem,7.5vw,6.4rem);color:var(--morado)}
+.titulo-proyecto{display:flex;align-items:center;gap:clamp(1rem,3vw,2rem)}
+.titulo-proyecto h2{min-width:0}
+.logo-proyecto{width:clamp(110px,15vw,180px);height:auto;aspect-ratio:1;border-radius:50%;flex:none}
 .lead{margin:1.2rem 0 2rem;max-width:56ch;font-weight:500;font-size:1.1rem}
 .caso{display:grid;grid-template-columns:1.7fr 1fr;gap:1rem}
 .media{aspect-ratio:var(--ar,16/9);background:var(--morado);color:var(--lila);border-radius:16px;overflow:hidden;display:grid;place-items:center;text-align:center;padding:1rem;font-size:.9rem}
@@ -239,6 +242,10 @@ footer{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-
   .logo-hero{max-width:300px;order:-1}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+ @media (max-width:560px){
+  .titulo-proyecto{flex-direction:column;align-items:flex-start}
+  .logo-proyecto{width:90px}
+}
 </style>
 </head>
 <body>
@@ -443,7 +450,10 @@ footer{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-
 <div class="pagina" id="pg-proyectos" hidden>
 <!-- PROYECTO iSUSHI -->
 <section class="card pad" id="proyecto">
+<div class="titulo-proyecto">
+  <img class="logo-proyecto" src="img/logo-isushi.png" alt="Logo de iSushi" width="360" height="360">
   <h2>iSushi…<br><span class="bar">¡un rollo de sabor!</span></h2>
+</div>
   <p class="lead">Una campaña integral que lleva una misma idea a spot, reels, valla y radio.</p>
   <div class="caso">
     <!-- SPOT PRINCIPAL (horizontal 16:9). Reemplaza el <span> por:
